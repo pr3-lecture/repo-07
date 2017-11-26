@@ -1,31 +1,57 @@
 # Übungsblatt 1
 
-Name:			Tobias Jünemann
-Matrikel-Nr.:	1428699
+**Name:			Tobias Jünemann**  
+**Matrikel-Nr.:	1428699**  
 
----
 
 ## Aufgabe 1: Methoden zur Listenmanipulation
 
 a) **Elemente tauschen:** Schreiben Sie eine Funktion `rotiere`, die eine Liste als Argument erhält und eine
-neue Liste zurückliefert, in der das vormals erste Element nun das letzte ist.
+neue Liste zurückliefert, in der das vormals erste Element nun das letzte ist.  
+
+(rotiere '(eins zwei drei vier)) -> (zwei drei vier eins)  
 
 ```
-Lösung ...
+> (defun rotiere (liste)
+    (append (cdr liste) (list (first liste)))
+)
+ROTIERE
+> (rotiere '(eins zwei drei vier))
+(ZWEI DREI VIER EINS)
+>
 ```
 
 b) **Element einfügen:** Schreiben Sie eine Funktion `neues-vorletztes`, die eine Liste als Argument erhält
-und eine neue Liste zurückliefert, in der das vormals erste Element nun das letzte ist.
+und eine neue Liste zurückliefert, in der das vormals erste Element nun das letzte ist.  
+
+(neues-vorletztes 'dreieinhalb '(eins zwei drei vier)) -> (eins zwei drei dreieinhalb vier)  
 
 ```
-Lösung ...
+> (defun neues-vorletztes (element liste)
+    (append (reverse (cdr (reverse liste))) (list element) (last liste))
+)
+NEUES-VORLETZTES
+> (neues-vorletztes 'dreieinhalb '(eins zwei drei vier))
+(EINS ZWEI DREI DREIEINHALB VIER)
+>
 ```
 
 c) **Länge einer Liste berechnen:** Schreiben Sie eine Funktion `my-length` zur Berechnung der Länge
-einer Liste.
+einer Liste.  
+
+(my-length '(eins zwei drei vier)) -> 4  
 
 ```
-Lösung ...
+> (defun my-length (liste)
+  (if (endp liste)
+     0
+     (+ 1 (my-length (cdr liste)))
+  )
+)
+MY-LENGTH
+> (my-length '(eins zwei drei vier))
+4
+>
 ```
 
 d) **Länge einer geschachtelten Liste berechnen:** Schreiben Sie eine Funktion `my-lengthR` zur Berech-
