@@ -146,6 +146,65 @@ Beispiel:
 b) **Baumtraversierung:** Schreiben Sie 3 Funktionen zum Traversieren eines Binärbaums, bei der auch
 die Knoteninhalte ausgegeben werden.
 
+- **inorder(tree):** Durchläuft den Baum in Inorder und gibt die Knoteninhalte aus.
+
 ```
-Lösung ...
+> (defun inorder (liste)
+  (if (endp liste)
+    '()
+    (if (listp liste)
+      (if (and (endp (cadr liste)) (endp (caddr liste)))
+        liste
+        (append (inorder (cadr liste)) (list (car liste)) (inorder (caddr liste)))
+      )
+      '()
+    )
+  )
+)
+INORDER
+> (inorder '(M (G (E (A () ()) ()) (H () ())) (S (Q () (R () ())) (V () ()))))
+(A NIL NIL E G H NIL NIL M Q R NIL NIL S V NIL NIL)
+>
+```
+
+- **postorder(tree):** Durchläuft den Baum in Postorder und gibt die Knoteninhalte aus.
+
+```
+> (defun postorder (liste)
+  (if (endp liste)
+    '()
+    (if (listp liste)
+      (if (and (endp (cadr liste)) (endp (caddr liste)))
+        liste
+        (append (postorder (cadr liste)) (postorder (caddr liste)) (list (car liste)))
+      )
+      '()
+    )
+  )
+)
+POSTORDER
+> (postorder '(M (G (E (A () ()) ()) (H () ())) (S (Q () (R () ())) (V () ()))))
+(A NIL NIL E H NIL NIL G R NIL NIL Q V NIL NIL S M)
+>
+```
+
+- **preorder(tree):** Durchläuft den Baum in Preorder und gibt die Knoteninhalte aus.
+
+```
+> (defun preorder (liste)
+  (if (endp liste)
+    '()
+    (if (listp liste)
+      (if (and (endp (cadr liste)) (endp (caddr liste)))
+        liste
+        (append (list (car liste)) (preorder (cadr liste)) (preorder (caddr liste)))
+      )
+      '()
+    )
+  )
+)
+PREORDER
+> (preorder '(M (G (E (A () ()) ()) (H () ())) (S (Q () (R () ())) (V () ()))))
+(M G E A NIL NIL H NIL NIL S Q R NIL NIL V NIL NIL)
+>
 ```
