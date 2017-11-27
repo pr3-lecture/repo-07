@@ -123,7 +123,21 @@ a) **Darstellung eines Binärbaums:** Uberlegen Sie, wie Sie mittels einer Liste
 können.
 
 ```
-Lösung ...
+Ein Binär-Baum kann in Lisp als miteinander verkettete Listen mit je drei Elementen realisiert werden. Dabei ist das erste Element der Liste immer die Wurzel, das zweite Element der linke Knoten und das dritte Element der rechte Knoten. Dieses Schema lässt sich dann in der Tiefe auch auf alle Unterbäume anwenden.
+
+Beispiel:
+                   M
+            _______|_______
+           /               \
+           G               S
+        ___|___         ___|___
+       /       \       /       \
+       E       H       Q       V
+    ___|___         ___|___
+   /       \       /       \
+   A                       R
+
+(M (G (E (A () ()) ()) (H () ())) (S (Q () (R () ())) (V () ())))
 ```
 
 b) **Baumtraversierung:** Schreiben Sie 3 Funktionen zum Traversieren eines Binärbaums, bei der auch
