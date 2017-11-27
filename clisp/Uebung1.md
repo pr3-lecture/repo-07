@@ -55,22 +55,63 @@ MY-LENGTH
 ```
 
 d) **Länge einer geschachtelten Liste berechnen:** Schreiben Sie eine Funktion `my-lengthR` zur Berech-
-nung der Länge einer Liste und aller eingeschachtelten Listen.
+nung der Länge einer Liste und aller eingeschachtelten Listen.  
+
+(my-lengthR '(eins zwei (zwei (zwei drei) eins) drei vier)) -> 8  
 
 ```
-Lösung ...
+> (defun my-lengthR (liste)
+  (if (endp liste)
+    0
+    (if (listp (first liste))
+      (+ (my-lengthR (first liste)) (my-lengthR (cdr liste)))
+      (+ 1 (my-lengthR (cdr liste)))
+    )
+  )
+)
+MY-LENGTHR
+> (my-lengthR '(eins zwei (zwei (zwei drei) eins) drei vier))
+8
+>
 ```
 
-e) **Listen umkehren:** Schreiben eine Funktion `my-reverse` zum Umkehren einer Liste.
+e) **Listen umkehren:** Schreiben eine Funktion `my-reverse` zum Umkehren einer Liste.  
+
+(my-reverse '(eins zwei (zwei (zwei drei) eins) drei vier))  
+-> (vier drei (zwei (zwei drei) eins) zwei eins)  
 
 ```
-Lösung ...
+> (defun my-reverse (liste)
+  (if (endp liste)
+     '()
+     (append (my-reverse (cdr liste)) (list (first liste)))
+  )
+)
+MY-REVERSE
+> (my-reverse '(eins zwei (zwei (zwei drei) eins) drei vier))
+(VIER DREI (ZWEI (ZWEI DREI) EINS) ZWEI EINS)
+>
 ```
 
-f) **Geschachtelte Listen umkehren:** Schreiben eine Funktion `my-reverseR` zum Umkehren einer Liste.
+f) **Geschachtelte Listen umkehren:** Schreiben eine Funktion `my-reverseR` zum Umkehren einer Liste.  
+
+(my-reverseR '(eins zwei (zwei (zwei drei) eins) drei vier))  
+-> (vier drei (eins (drei zwei) zwei) zwei eins)  
 
 ```
-Lösung ...
+> (defun my-reverseR (liste)
+  (if (endp liste)
+    '()
+    (if (listp (first liste))
+      (append (my-reverseR (cdr liste)) (list (my-reverseR (first liste))))
+      (append (my-reverseR (cdr liste)) (list (first liste)))
+    )
+  )
+)
+MY-REVERSER
+> (my-reverseR '(eins zwei (zwei (zwei drei) eins) drei vier))
+(VIER DREI (EINS (DREI ZWEI) ZWEI) ZWEI EINS)
+>
 ```
 
 
