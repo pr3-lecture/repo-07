@@ -38,7 +38,19 @@ Lösung ...
 Ermittelt die Anzahl der Knoten im Baum.
 
 ```
-Lösung ...
+> (defun size (liste)
+  (if (endp liste)
+    0
+    (if (listp (first liste))
+      (+ (size (first liste)) (size (cdr liste)))
+      (+ 1 (size (cdr liste)))
+    )
+  )
+)
+SIZE
+> (size '(M (G (E (A () ()) ()) (H () ())) (S (Q () (R () ())) (V () ()))))
+9
+>
 ```
 
 - **height tree**  
