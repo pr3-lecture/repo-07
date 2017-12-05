@@ -76,7 +76,18 @@ Lösung ...
 **true** genau dann, wenn der Baum leer ist.
 
 ```
-Lösung ...
+> (defun isEmpty (liste)
+  (if (endp liste)
+    T
+    nil
+  )
+)
+ISEMPTY
+> (isempty '())
+T
+> (isempty '(M () ()))
+NIL
+>
 ```
 
 - **addAll tree otherTree**  
