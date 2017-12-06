@@ -58,10 +58,7 @@ Ermittelt die Anzahl der Knoten im Baum.
 > (defun size (tree)
   (if (endp tree)
     0
-    (if (listp (first tree))
-      (+ (size (first tree)) (size (cdr tree)))
-      (+ 1 (size (cdr tree)))
-    )
+    (+ 1 (size (cadr tree)) (size (caddr tree)))
   )
 )
 SIZE
@@ -74,7 +71,16 @@ SIZE
 Ermittelt die Höhe des Baums.
 
 ```
-Lösung ...
+> (defun height (tree)
+  (if (endp tree)
+    0
+    (+ 1 (max (height (cadr tree)) (height (caddr tree))))
+  )
+)
+HEIGHT
+> (height '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))))
+4
+>
 ```
 
 - **getMax tree**  
