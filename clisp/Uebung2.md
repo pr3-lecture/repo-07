@@ -89,8 +89,17 @@ Liefert das größte Element im Baum.
 ```
 > (defun getMax (tree)
   (if (endp tree)
-    0
-    (max (car tree) (getMax (cadr tree)) (getMax (caddr tree)))
+    nil
+    (if (and (endp (cadr tree)) (endp (caddr tree)))
+      (car tree)
+      (if (endp (cadr tree))
+        (max (car tree) (getMax (caddr tree)))
+        (if (endp (caddr tree))
+          (max (car tree) (getMax (cadr tree)))
+          (max (car tree) (getMax (cadr tree)) (getMax (caddr tree)))
+        )
+      )
+    )
   )
 )
 GETMAX
@@ -103,7 +112,25 @@ GETMAX
 Liefert das kleinste Element im Baum.
 
 ```
-Lösung ...
+> (defun getMin (tree)
+  (if (endp tree)
+    nil
+    (if (and (endp (cadr tree)) (endp (caddr tree)))
+      (car tree)
+      (if (endp (cadr tree))
+        (min (car tree) (getMin (caddr tree)))
+        (if (endp (caddr tree))
+          (min (car tree) (getMin (cadr tree)))
+          (min (car tree) (getMin (cadr tree)) (getMin (caddr tree)))
+        )
+      )
+    )
+  )
+)
+GETMIN
+> (getmin '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))))
+1
+>
 ```
 
 - **remove tree val**  
