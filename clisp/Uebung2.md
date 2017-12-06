@@ -87,7 +87,16 @@ HEIGHT
 Liefert das größte Element im Baum.
 
 ```
-Lösung ...
+> (defun getMax (tree)
+  (if (endp tree)
+    0
+    (max (car tree) (getMax (cadr tree)) (getMax (caddr tree)))
+  )
+)
+GETMAX
+> (getmax '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))))
+22
+>
 ```
 
 - **getMin tree**  
