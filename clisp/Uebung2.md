@@ -31,24 +31,41 @@ Lösung ...
 Testet, ob **val** im Baum vorhanden ist.
 
 ```
-Lösung ...
+> (defun contains (tree val)
+  (if (endp tree)
+    nil
+    (if (listp (first tree))
+      (or (contains (first tree) val) (contains (cdr tree) val))
+      (if (eql (first tree) val)
+        T
+        (contains (cdr tree) val)
+      )
+    )
+  )
+)
+CONTAINS
+> (contains '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 18)
+T
+> (contains '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 99)
+NIL
+>
 ```
 
 - **size tree**  
 Ermittelt die Anzahl der Knoten im Baum.
 
 ```
-> (defun size (liste)
-  (if (endp liste)
+> (defun size (tree)
+  (if (endp tree)
     0
-    (if (listp (first liste))
-      (+ (size (first liste)) (size (cdr liste)))
-      (+ 1 (size (cdr liste)))
+    (if (listp (first tree))
+      (+ (size (first tree)) (size (cdr tree)))
+      (+ 1 (size (cdr tree)))
     )
   )
 )
 SIZE
-> (size '(M (G (E (A () ()) ()) (H () ())) (S (Q () (R () ())) (V () ()))))
+> (size '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))))
 9
 >
 ```
@@ -88,8 +105,8 @@ Lösung ...
 **true** genau dann, wenn der Baum leer ist.
 
 ```
-> (defun isEmpty (liste)
-  (if (endp liste)
+> (defun isEmpty (tree)
+  (if (endp tree)
     T
     nil
   )
@@ -97,7 +114,7 @@ Lösung ...
 ISEMPTY
 > (isempty '())
 T
-> (isempty '(M () ()))
+> (isempty '(13 () ()))
 NIL
 >
 ```
@@ -124,3 +141,26 @@ er korrekt ist, versteht sich von selbst); Effizienz ist zweitrangig. Nutzen Sie
 
 Uberlegen Sie, wie man die Eingabe möglichst komfortabel gestalten kann. D.h. wie könnte eine "Benutzer-  
 schnittstelle" aussehen.  
+
+```
+Ein Binär-Baum kann in Lisp als miteinander verkettete Listen mit je drei Elementen realisiert werden.  
+Dabei ist das erste Element der Liste immer die Wurzel, das zweite Element der linke Knoten und das  
+dritte Element der rechte Knoten. Dieses Schema lässt sich dann in der Tiefe auch auf alle Unterbäume  
+anwenden.  
+  
+  
+```
+Baum zum Testen:
+                   13
+            _______|_______
+           /               \
+           7               19
+        ___|___         ___|___
+       /       \       /       \
+       5       8       17      22
+    ___|___         ___|___
+   /       \       /       \
+   1                       18
+
+(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ())))
+```
