@@ -202,7 +202,22 @@ Fügt alle Elemente des übergebenen Baums (**otherTree**) in
 den aktuellen Baum **tree** ein.
 
 ```
-Lösung ...
+> (defun addAll (tree otherTree)
+  (if (endp otherTree)
+    tree
+    (if (listp (first otherTree))
+      (addAll (addAll tree (cdr otherTree)) (first otherTree))
+      (progn
+        (setq tree (insert tree (first otherTree)))
+        (addAll tree (cdr otherTree))
+      )
+    )
+  )
+)
+ADDALL
+> (addall '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 <)) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) '(99 (6 () ()) (3 () ())))
+(13 (7 (5 (1 NIL (3 NIL NIL)) (6 NIL NIL)) (8 NIL NIL)) (19 (17 NIL (18 NIL NIL)) (22 NIL (99 NIL NIL))))
+>
 ```
 
 - **printLevelorder tree**  
