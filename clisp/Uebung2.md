@@ -46,7 +46,21 @@ INSERT
 Fügt die int-Werte, die in der Datei stehen in den Baum ein.
 
 ```
-Lösung ...
+> (defun insertFromFile (tree file)
+  (let ((in (open file :if-does-not-exist nil)))
+    (when in
+      (loop for line = (read-line in nil)
+        while line do (setq tree (insert tree (read-from-string (concatenate 'string line))))
+      )
+      (close in)
+      tree
+    )
+  )
+)
+INSERTFROMFILE
+> (insertfromfile '() "/lisp-test/nodes.lst")
+(13 (7 (5 (1 NIL NIL) NIL) (8 NIL NIL)) (19 (17 NIL (18 NIL NIL)) (22 NIL NIL)))
+>
 ```
 
 - **contains tree val**  
