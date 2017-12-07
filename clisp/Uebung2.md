@@ -17,7 +17,29 @@ ergänzten Baum zurück. Am besten wird dabei ein neuer Baum
 erzeugt.
 
 ```
-Lösung ...
+> (defun insert (tree val)
+  (if (endp tree)
+    (list val nil nil)
+    (if (and (< val (first tree)) (endp (cadr tree)) (endp (caddr tree)))
+      (list (first tree) (list val nil nil) nil)
+      (if (and (> val (first tree)) (endp (cadr tree)) (endp (caddr tree)))
+        (list (first tree) nil (list val nil nil))
+        (if (and (< val (first tree)))
+          (list (first tree) (insert (cadr tree) val) (caddr tree))
+          (list (first tree) (cadr tree) (insert (caddr tree) val))
+        )
+      )
+    )
+  )
+)
+INSERT
+> (insert '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 99)
+(13 (7 (5 (1 NIL NIL) NIL) (8 NIL NIL)) (19 (17 NIL (18 NIL NIL)) (22 NIL (99 NIL NIL))))
+> (insert '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 21)
+(13 (7 (5 (1 NIL NIL) NIL) (8 NIL NIL)) (19 (17 NIL (18 NIL NIL)) (22 (21 NIL NIL) NIL)))
+> (insert '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 14)
+(13 (7 (5 (1 NIL NIL) NIL) (8 NIL NIL)) (19 (17 (14 NIL NIL) (18 NIL NIL)) (22 NIL NIL)))
+>
 ```
 
 - **insert tree filename**  
