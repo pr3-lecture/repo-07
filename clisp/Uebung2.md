@@ -224,7 +224,29 @@ ADDALL
 Gibt Baum in Levelorder aus.
 
 ```
-Lösung ...
+;Algorithmus adaptiert von http://www.geeksforgeeks.org/level-order-tree-traversal/
+
+> (defun printGivenLevel(tree level)
+  (if (endp tree)
+    '()
+    (if (= 1 level)
+      (list (car tree))
+      (append (printGivenLevel (cadr tree) (- level 1)) (printGivenLevel (caddr tree) (- level 1)))
+    )
+  )
+)
+PRINTGIVENLEVEL
+> (defun printLevelorder (tree)
+  (setq result '())
+  (loop for d from 1 to (height tree)
+    do (setq result (append result (printGivenLevel tree d)))
+  )
+  result
+)
+PRINTLEVELORDER
+> (printlevelorder '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))))
+(13 7 19 5 8 17 22 1 18)
+>
 ```
 
 Beschreiben Sie (im Kommentar), welche Ergebnisse herauskommen.  
