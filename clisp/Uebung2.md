@@ -3,6 +3,21 @@
 **Name:			Tobias Jünemann**  
 **Matrikel-Nr.:	1428699**  
 
+```
+Baum zum Testen:
+                   13
+            _______|_______
+           /               \
+           7               19
+        ___|___         ___|___
+       /       \       /       \
+       5       8       17      22
+    ___|___         ___|___
+   /       \       /       \
+   1                       18
+
+(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ())))
+```
 
 ## Aufgabe 1: BinaryTree
 
@@ -176,7 +191,32 @@ Wenn ein innerer Knoten gelöscht wird, dann erstetzen Sie ihn
 durch den kleinsten Knoten in dessen rechtem Teilbaum.
 
 ```
-Lösung ...
+> (defun removeFlat (tree val)
+  (if (endp tree)
+    nil
+    (if (listp (first tree))
+      (append (removeFlat (first tree) val) (removeFlat (cdr tree) val))
+      (if (eql (first tree) val)
+        (removeFlat (cdr tree) val)
+        (append (list (first tree)) (removeFlat (cdr tree) val))
+      )
+    )
+  )
+)
+REMOVEFLAT
+> (defun removeValue (tree val)
+  (setq result '())
+  (loop for d in (removeFlat tree val)
+    do (setq result (insert result d))
+  )
+  result
+)
+REMOVEVALUE
+> (removeValue '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 8)
+(13 (7 (5 (1 NIL NIL) NIL) NIL) (19 (17 NIL (18 NIL NIL)) (22 NIL NIL)))
+> (removeValue '(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ()))) 19)
+(13 (7 (5 (1 NIL NIL) NIL) (8 NIL NIL)) (17 NIL (18 NIL (22 NIL NIL))))
+>
 ```
 
 - **isEmpty tree**  
@@ -256,20 +296,3 @@ er korrekt ist, versteht sich von selbst); Effizienz ist zweitrangig. Nutzen Sie
 
 Uberlegen Sie, wie man die Eingabe möglichst komfortabel gestalten kann. D.h. wie könnte eine "Benutzer-  
 schnittstelle" aussehen.  
-  
-  
-```
-Baum zum Testen:
-                   13
-            _______|_______
-           /               \
-           7               19
-        ___|___         ___|___
-       /       \       /       \
-       5       8       17      22
-    ___|___         ___|___
-   /       \       /       \
-   1                       18
-
-(13 (7 (5 (1 () ()) ()) (8 () ())) (19 (17 () (18 () ())) (22 () ())))
-```
