@@ -6,7 +6,6 @@
 int xor(KEY key, const char* input, char* output);
 int hasIllegalChar(const char* input, char* allowedChars);
 
-
 int main(int argc, char* argv[]) {
     if(!(argc >= 2 && argc <= 3)) {
         fprintf(stderr, "Wrong number of parameters!");
@@ -91,7 +90,6 @@ int hasIllegalChar(const char* input, char* allowedChars) {
     }
     return 0;
 }
-
 
 int xor(KEY key, const char* input, char* output) {
     int keyLength = strlen(key.chars);
